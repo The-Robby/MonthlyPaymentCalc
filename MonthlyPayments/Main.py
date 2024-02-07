@@ -197,15 +197,15 @@ def check_spendings():
         attributes_list.append(attribute_details)
 
     # Calculate and display totals
-    monthly_total = sum(attribute['value'] for attribute in data if attribute.get('type') == 'Monthly')
+    monthly_total = round(sum(attribute['value'] for attribute in data if attribute.get('type') == 'Monthly'), 2)
     quarterly_total = round(sum(attribute['value'] for attribute in data if attribute.get('type') in ('Quarterly')) + 3  * monthly_total, 2)
-    quarterly_only_total = sum(attribute['value'] for attribute in data if attribute.get('type') in ('Quarterly'))
+    quarterly_only_total = round(sum(attribute['value'] for attribute in data if attribute.get('type') in ('Quarterly')), 2)
     yearly_total = round(
         sum(attribute['value'] for attribute in data if attribute.get('type') == 'Yearly') +
         12 * monthly_total +
         4 * quarterly_only_total, 2)
-    yearly_only_total = sum(attribute['value'] for attribute in data if attribute.get('type') == 'Yearly')
-    monthly_ifall_total = (sum(attribute['value'] for attribute in data if attribute.get('type') == 'Monthly') + quarterly_only_total / 3 + yearly_only_total / 12)
+    yearly_only_total = round(sum(attribute['value'] for attribute in data if attribute.get('type') == 'Yearly'), 2)
+    monthly_ifall_total = round(sum(attribute['value'] for attribute in data if attribute.get('type') == 'Monthly') + quarterly_only_total / 3 + yearly_only_total / 12, 2)
 
     totals_list = [
         "Totals:",

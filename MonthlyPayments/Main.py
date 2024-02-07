@@ -30,7 +30,7 @@ def add_attribute():
         [sg.Text('What do you want to call this attribute?'), sg.InputText(key='-NAME-')],
         [sg.Text('How much do you spend on...?'), sg.InputText(key='-VALUE-')],
         [sg.Text('Execution Date (optional):'), sg.InputText(key='-DATE-')],
-        [sg.Text('Type:'), sg.DropDown(values=['Monthly', 'Bi-Monthly', 'Quarterly', 'Yearly'], key='-TYPE-', default_value='Monthly')],
+        [sg.Text('Type:'), sg.DropDown(values=['Monthly', 'Quarterly', 'Yearly'], key='-TYPE-', default_value='Monthly')],
         [sg.Button('Ok'), sg.Button('Cancel')]
     ]
 
@@ -205,10 +205,12 @@ def check_spendings():
         12 * monthly_total +
         4 * quarterly_only_total, 2)
     yearly_only_total = sum(attribute['value'] for attribute in data if attribute.get('type') == 'Yearly')
+    monthly_ifall_total = (sum(attribute['value'] for attribute in data if attribute.get('type') == 'Monthly') + quarterly_only_total / 3 + yearly_only_total / 12)
 
     totals_list = [
         "Totals:",
         f"Monthly Total: {monthly_total}",
+        f"Monthly If All Would Be Monthly Total: {monthly_total}",
         f"Quarterly Total: {quarterly_total}",
         f"Quarterly Only Total: {quarterly_only_total}",
         f"Yearly Total: {yearly_total}",
@@ -217,8 +219,8 @@ def check_spendings():
 
     # Create the layout with Listbox
     layout_check_spendings = [
-        [sg.Listbox(values=attributes_list, size=(80, 15))],
-        [sg.Listbox(values=totals_list, size=(80, 6))],
+        [sg.Listbox(values=attributes_list, size=(80, 14))],
+        [sg.Listbox(values=totals_list, size=(80, 7))],
         [sg.Button('Cancel')]
     ]
 

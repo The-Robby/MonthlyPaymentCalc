@@ -210,7 +210,7 @@ def check_spendings():
     totals_list = [
         "Totals:",
         f"Monthly Total: {monthly_total}",
-        f"Monthly If All Would Be Monthly Total: {monthly_total}",
+        f"Monthly If All Would Be Monthly Total: {monthly_ifall_total}",
         f"Quarterly Total: {quarterly_total}",
         f"Quarterly Only Total: {quarterly_only_total}",
         f"Yearly Total: {yearly_total}",
